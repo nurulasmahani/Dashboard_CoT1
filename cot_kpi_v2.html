@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sistem KPI CoT — Politeknik Malaysia</title>
+<title>Sistem KPI CoT - Politeknik Malaysia</title>
 <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -214,9 +214,9 @@ textarea.form-input{resize:vertical;min-height:60px}
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback } = React;
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // CONSTANTS
-// ═══════════════════════════════════════════════════
+// ===================================================
 const COT_LIST = [
   { id:'cmep', name:'CMeP - Centre for Mechanical Engineering Plastic', poly:'POLIMAS' },
   { id:'ctop', name:'CToP - Centre of Town and Regional Planning', poly:'POLIMAS' },
@@ -357,9 +357,9 @@ const ELEMENT_DEFS = {
 
 const INCOME_SOURCES = ['Research','Innovations','Teaching & Learning','Expert Services','Collaborations','Publications','Recognitions','Others'];
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // STORAGE HELPERS
-// ═══════════════════════════════════════════════════
+// ===================================================
 const storageKey = (cotId, year, quarter, section) => `cot_kpi_${cotId}_${year}_q${quarter}_${section}`;
 
 function loadData(cotId, year, quarter, section) {
@@ -384,9 +384,9 @@ function saveObj(cotId, year, quarter, section, obj) {
   localStorage.setItem(storageKey(cotId, year, quarter, section), JSON.stringify(obj));
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // SCORING ENGINE
-// ═══════════════════════════════════════════════════
+// ===================================================
 function calcScores(data) {
   const collab = data.collab || [];
   const ktp = data.ktp || [];
@@ -457,9 +457,9 @@ function scoreChipClass(v, max) {
   return 'chip-red';
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // SAMPLE DATA GENERATORS
-// ═══════════════════════════════════════════════════
+// ===================================================
 function sampleCMeP() {
   return {
     collab:[
@@ -493,7 +493,7 @@ function sampleCMeP() {
     ],
     award:[
       {id:'a1',peringkat:'National',tajuk:'Anugerah Inovasi TVET Emas 2025',skop:'R&I',sinopsis:'Sistem kawalan suhu acuan plastik automatik berasaskan IoT',badan:'Jabatan Pendidikan Politeknik & Kolej Komuniti (JPKK)',tarikh:'2025-04-28',nilai:3000},
-      {id:'a2',peringkat:'International',tajuk:'Gold Medal — International Invention & Innovation 2025',skop:'R&I',sinopsis:'Smart Mould Monitoring System',badan:'International Federation of Inventors Associations (IFIA)',tarikh:'2025-05-15',nilai:5000},
+      {id:'a2',peringkat:'International',tajuk:'Gold Medal - International Invention & Innovation 2025',skop:'R&I',sinopsis:'Smart Mould Monitoring System',badan:'International Federation of Inventors Associations (IFIA)',tarikh:'2025-05-15',nilai:5000},
     ],
     tl_bahan:[
       {id:'tb1',tajuk:'Modul Interaktif: Asas Reka Bentuk Acuan Plastik',jenis:'eBook',tujuan:'Membantu pelajar memahami prinsip asas reka bentuk acuan',status:'Diluluskan',tempoh:'16 Minggu',dep:'Ya',impak:'80% pelajar mencapai gred A',nilai:0},
@@ -550,9 +550,9 @@ function sampleCToP() {
   };
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // TOAST
-// ═══════════════════════════════════════════════════
+// ===================================================
 let toastSetFn = null;
 function showToast(msg, type='success') {
   if(toastSetFn) toastSetFn(prev=>[...prev,{id:Date.now(),msg,type}]);
@@ -567,9 +567,9 @@ function ToastContainer() {
   return <div className="toast">{toasts.map(t=><div key={t.id} className={`toast-item ${t.type}`}>{t.type==='success'?'✅':'❌'} {t.msg}</div>)}</div>;
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // MODAL FORM
-// ═══════════════════════════════════════════════════
+// ===================================================
 function ModalForm({ section, record, onSave, onClose }) {
   const def = ELEMENT_DEFS[section];
   const [form, setForm] = useState(() => {
@@ -597,7 +597,7 @@ function ModalForm({ section, record, onSave, onClose }) {
     <div className="modal-overlay" onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
       <div className="modal" onClick={e=>e.stopPropagation()}>
         <div className="modal-header">
-          <span className="modal-title">{record?'✏️ Edit':'➕ Tambah'} — {def.label}</span>
+          <span className="modal-title">{record?'✏️ Edit':'➕ Tambah'} - {def.label}</span>
           <button className="modal-close" onClick={onClose}>✕</button>
         </div>
         <div className="modal-body">
@@ -630,9 +630,9 @@ function ModalForm({ section, record, onSave, onClose }) {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // CRUD TABLE
-// ═══════════════════════════════════════════════════
+// ===================================================
 function CRUDTable({ section, rows, onAdd, onEdit, onDelete, scoreLabel, scoreValue, colKeys }) {
   const def = ELEMENT_DEFS[section];
   const displayCols = colKeys || def.fields.slice(0,5).map(f=>f.key);
@@ -661,7 +661,7 @@ function CRUDTable({ section, rows, onAdd, onEdit, onDelete, scoreLabel, scoreVa
               <tr key={r.id}>
                 <td style={{color:'var(--muted)',fontSize:11}}>{i+1}</td>
                 {colDefs.map(f=>{
-                  const v = r[f.key]??'—';
+                  const v = r[f.key]??'-';
                   if(f.key==='status') {
                     const cls = ['Selesai','Completed','Published','Diterima','Diluluskan'].includes(v)?'bg-green':['On-Progress','Ongoing','Dalam Proses'].includes(v)?'bg-amber':'bg-gray';
                     return <td key={f.key}><span className={`badge ${cls}`}>{v}</span></td>;
@@ -670,9 +670,9 @@ function CRUDTable({ section, rows, onAdd, onEdit, onDelete, scoreLabel, scoreVa
                     const cls = v==='International'||v==='Indexed Journal'?'bg-blue':v==='National'||v==='Seminar Proceeding'?'bg-amber':'bg-gray';
                     return <td key={f.key}><span className={`badge ${cls}`}>{v}</span></td>;
                   }
-                  if(f.type==='number'&&v&&v!=='—') return <td key={f.key} style={{color:'var(--green)',fontWeight:600}}>RM {parseFloat(v).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>;
+                  if(f.type==='number'&&v&&v!=='-') return <td key={f.key} style={{color:'var(--green)',fontWeight:600}}>RM {parseFloat(v).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}</td>;
                   if(f.type==='textarea') return <td key={f.key} style={{maxWidth:200,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',color:'var(--muted)'}}>{v}</td>;
-                  return <td key={f.key}>{v||'—'}</td>;
+                  return <td key={f.key}>{v||'-'}</td>;
                 })}
                 <td>
                   <div style={{display:'flex',gap:4}}>
@@ -689,9 +689,9 @@ function CRUDTable({ section, rows, onAdd, onEdit, onDelete, scoreLabel, scoreVa
   );
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // INCOME TABLE COMPONENT
-// ═══════════════════════════════════════════════════
+// ===================================================
 function IncomeSection({ rows, onChange, scoreValue }) {
   function updateCell(id, field, val) {
     const updated = rows.map(r=>r.id===id?{...r,[field]:val}:r);
@@ -753,9 +753,9 @@ function IncomeSection({ rows, onChange, scoreValue }) {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // CHART COMPONENT
-// ═══════════════════════════════════════════════════
+// ===================================================
 function EChart({ id, option }) {
   const ref = useRef(null);
   const chartRef = useRef(null);
@@ -774,9 +774,9 @@ function EChart({ id, option }) {
   return <div ref={ref} style={{width:'100%',height:230}}/>;
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // DASHBOARD VIEW
-// ═══════════════════════════════════════════════════
+// ===================================================
 function DashboardView({ data, scores, cotName }) {
   const clusterBarOpt = {
     tooltip:{trigger:'axis'},
@@ -823,7 +823,7 @@ function DashboardView({ data, scores, cotName }) {
         <div className="kpi red"><div className="kpi-lbl">Markah Keseluruhan</div><div className="kpi-val">{scores.total}%</div><div className="kpi-sub">Maks 100%</div></div>
         <div className="kpi green"><div className="kpi-lbl">Jumlah Aktiviti</div><div className="kpi-val">{totalActs}</div><div className="kpi-sub">Semua elemen</div></div>
         <div className="kpi amber"><div className="kpi-lbl">Jumlah Pendapatan</div><div className="kpi-val" style={{fontSize:18}}>{fmt(scores.incomeTotal)}</div><div className="kpi-sub">Sasaran RM 100,000</div></div>
-        <div className="kpi blue"><div className="kpi-lbl">Status Pencapaian</div><div className="kpi-val" style={{fontSize:16,paddingTop:4}}>{scores.total>=75?'🟢 Cemerlang':scores.total>=50?'🟡 Memuaskan':'🔴 Perlu Usaha'}</div><div className="kpi-sub">{scores.total>=75?'≥ 75%':scores.total>=50?'50–74%':'< 50%'}</div></div>
+        <div className="kpi blue"><div className="kpi-lbl">Status Pencapaian</div><div className="kpi-val" style={{fontSize:16,paddingTop:4}}>{scores.total>=75?'🟢 Cemerlang':scores.total>=50?'🟡 Memuaskan':'🔴 Perlu Usaha'}</div><div className="kpi-sub">{scores.total>=75?'≥ 75%':scores.total>=50?'50-74%':'< 50%'}</div></div>
       </div>
       <div className="cluster-row">
         {clusterData.map(cl=>{
@@ -846,9 +846,9 @@ function DashboardView({ data, scores, cotName }) {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // LAMPIRAN F VIEW
-// ═══════════════════════════════════════════════════
+// ===================================================
 function LampiranFView({ scores, validators, onValidatorChange, cotName, year, quarter }) {
   const fmt = v => 'RM '+v.toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2});
 
@@ -874,14 +874,14 @@ function LampiranFView({ scores, validators, onValidatorChange, cotName, year, q
   ];
 
   const VALIDATOR_CFG = [
-    {key:'tpa',title:'👑 Chief Validator — Timbalan Pengarah Akademik (TPA)',sub:'Pengesahan Peringkat Tertinggi'},
-    {key:'pm',title:'✅ Validator 1 — Pengurus CoT',sub:'Pengesahan Pengurusan CoT'},
-    {key:'coord',title:'📋 Validator 2 — Penyelaras CoT POLIMAS',sub:'Pengesahan Akhir Politeknik'},
+    {key:'tpa',title:'👑 Chief Validator - Timbalan Pengarah Akademik (TPA)',sub:'Pengesahan Peringkat Tertinggi'},
+    {key:'pm',title:'✅ Validator 1 - Pengurus CoT',sub:'Pengesahan Pengurusan CoT'},
+    {key:'coord',title:'📋 Validator 2 - Penyelaras CoT POLIMAS',sub:'Pengesahan Akhir Politeknik'},
   ];
 
   return (
     <div>
-      <div className="sec-hdr"><h2>✅ Borang Lampiran F — Skor KPI &amp; Pengesahan</h2><div className="sec-line"></div>
+      <div className="sec-hdr"><h2>✅ Borang Lampiran F - Skor KPI &amp; Pengesahan</h2><div className="sec-line"></div>
         <button className="btn btn-cot btn-sm" onClick={()=>window.print()}>🖨️ Cetak / PDF</button>
       </div>
       <div style={{marginBottom:12,padding:'10px 14px',background:'var(--red-l)',borderRadius:8,border:'1px solid #fecaca',fontSize:12,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
@@ -971,7 +971,7 @@ function ValidatorBlock({ cfg, data, onChange }) {
       </div>
       <div style={{display:'flex',gap:10,alignItems:'center'}}>
         <div className={`sig-box${form.signed?' signed':''}`} onClick={sign} style={{flex:1}}>
-          {form.signed?`✅ Tandatangan direkod — ${form.tarikh}`:'✍️ Klik untuk Tandatangan Digital'}
+          {form.signed?`✅ Tandatangan direkod - ${form.tarikh}`:'✍️ Klik untuk Tandatangan Digital'}
         </div>
         <button className="btn btn-cot" onClick={save}>💾 Simpan</button>
       </div>
@@ -979,9 +979,9 @@ function ValidatorBlock({ cfg, data, onChange }) {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // EVIDEN VIEW
-// ═══════════════════════════════════════════════════
+// ===================================================
 function EvidenView() {
   return (
     <div>
@@ -1008,9 +1008,9 @@ function EvidenView() {
   );
 }
 
-// ═══════════════════════════════════════════════════
-// LAMPIRAN E — ELEMENT VIEWS
-// ═══════════════════════════════════════════════════
+// ===================================================
+// LAMPIRAN E - ELEMENT VIEWS
+// ===================================================
 function ElementView({ elemKey, subs, data, onDataChange, scores }) {
   const [activeTab, setActiveTab] = useState(subs[0].key);
   const [modal, setModal] = useState(null);
@@ -1062,24 +1062,24 @@ function ElementView({ elemKey, subs, data, onDataChange, scores }) {
   );
 }
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // ELEMENT PAGE CONFIG
-// ═══════════════════════════════════════════════════
+// ===================================================
 const ELEMENT_PAGES = [
-  { id:'elem1', icon:'🤝', label:'1.0 Collaboration', title:'Element 1.0 — Collaboration', subs:[{key:'collab',label:'1.1 Kolaborasi Aktif'},{key:'ktp',label:'1.2 KTP'}] },
-  { id:'elem2', icon:'🔬', label:'2.0 Research & Innovation', title:'Element 2.0 — Research & Innovation', subs:[{key:'ri_proposal',label:'2.1 Proposal R&I'},{key:'ri_selesai',label:'2.2 Projek Selesai'},{key:'ri_geran',label:'2.3 Geran Diperoleh'}] },
-  { id:'elem3', icon:'🎓', label:'3.0 Expert Services', title:'Element 3.0 — Expert Services', subs:[{key:'expert',label:'3.1 Perundingan'}] },
-  { id:'elem4', icon:'📖', label:'4.0 Publications', title:'Element 4.0 — Publications', subs:[{key:'pub',label:'4.1 Penerbitan'}] },
-  { id:'elem5', icon:'🏆', label:'5.0 Recognitions', title:'Element 5.0 — Recognitions & Awards', subs:[{key:'award',label:'5.1 Pengiktirafan'}] },
-  { id:'elem6', icon:'📚', label:'6.0 Teaching & Learning', title:'Element 6.0 — Teaching & Learning', subs:[{key:'tl_bahan',label:'6.1 Bahan PdP'},{key:'tl_latihan',label:'6.2 Program Latihan'}] },
-  { id:'elem7', icon:'💰', label:'7.0 Income Generation', title:'Element 7.0 — Income Generation', subs:[{key:'income',label:'7.1 Ringkasan Pendapatan'}] },
+  { id:'elem1', icon:'🤝', label:'1.0 Collaboration', title:'Element 1.0 - Collaboration', subs:[{key:'collab',label:'1.1 Kolaborasi Aktif'},{key:'ktp',label:'1.2 KTP'}] },
+  { id:'elem2', icon:'🔬', label:'2.0 Research & Innovation', title:'Element 2.0 - Research & Innovation', subs:[{key:'ri_proposal',label:'2.1 Proposal R&I'},{key:'ri_selesai',label:'2.2 Projek Selesai'},{key:'ri_geran',label:'2.3 Geran Diperoleh'}] },
+  { id:'elem3', icon:'🎓', label:'3.0 Expert Services', title:'Element 3.0 - Expert Services', subs:[{key:'expert',label:'3.1 Perundingan'}] },
+  { id:'elem4', icon:'📖', label:'4.0 Publications', title:'Element 4.0 - Publications', subs:[{key:'pub',label:'4.1 Penerbitan'}] },
+  { id:'elem5', icon:'🏆', label:'5.0 Recognitions', title:'Element 5.0 - Recognitions & Awards', subs:[{key:'award',label:'5.1 Pengiktirafan'}] },
+  { id:'elem6', icon:'📚', label:'6.0 Teaching & Learning', title:'Element 6.0 - Teaching & Learning', subs:[{key:'tl_bahan',label:'6.1 Bahan PdP'},{key:'tl_latihan',label:'6.2 Program Latihan'}] },
+  { id:'elem7', icon:'💰', label:'7.0 Income Generation', title:'Element 7.0 - Income Generation', subs:[{key:'income',label:'7.1 Ringkasan Pendapatan'}] },
 ];
 
 const ALL_SECTIONS = ['collab','ktp','ri_proposal','ri_selesai','ri_geran','expert','pub','award','tl_bahan','tl_latihan','income'];
 
-// ═══════════════════════════════════════════════════
+// ===================================================
 // APP
-// ═══════════════════════════════════════════════════
+// ===================================================
 function App() {
   const [cotIdx, setCotIdx] = useState(0);
   const [year, setYear] = useState('2025');
@@ -1133,7 +1133,7 @@ function App() {
 
   const NAV_ITEMS = [
     { id:'dashboard', icon:'📊', label:'Dashboard Ringkasan' },
-    { id:'lampiran-e', icon:'📝', label:'Lampiran E — Input Aktiviti', isHeader:true },
+    { id:'lampiran-e', icon:'📝', label:'Lampiran E - Input Aktiviti', isHeader:true },
     ...ELEMENT_PAGES.map(e=>({id:e.id, icon:e.icon, label:e.label, indent:true})),
     { id:'lampiran-f-sep', isHeader:true, label:'Lampiran F' },
     { id:'lampiranf', icon:'✅', label:'Borang Pengesahan KPI' },
@@ -1186,10 +1186,10 @@ function App() {
         {/* TOPBAR */}
         <div className="topbar">
           <span className="tb-title">
-            {activeView==='dashboard'?'📊 Dashboard KPI':activeView==='lampiranf'?'✅ Lampiran F — Pengesahan':activeView==='eviden'?'📎 Pengurusan Eviden':ELEMENT_PAGES.find(e=>e.id===activeView)?.title||'Sistem KPI CoT'}
+            {activeView==='dashboard'?'📊 Dashboard KPI':activeView==='lampiranf'?'✅ Lampiran F - Pengesahan':activeView==='eviden'?'📎 Pengurusan Eviden':ELEMENT_PAGES.find(e=>e.id===activeView)?.title||'Sistem KPI CoT'}
           </span>
           <select className="tb-select" value={cotIdx} onChange={e=>setCotIdx(Number(e.target.value))}>
-            {COT_LIST.map((c,i)=><option key={c.id} value={i}>{c.id.toUpperCase()} — {c.poly}</option>)}
+            {COT_LIST.map((c,i)=><option key={c.id} value={i}>{c.id.toUpperCase()} - {c.poly}</option>)}
           </select>
           <select className="tb-select" value={year} onChange={e=>setYear(e.target.value)}>
             <option>2025</option><option>2026</option><option>2027</option>
